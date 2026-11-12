@@ -22,11 +22,21 @@
 
 ## 🎬 The situation
 
-<p align="center"><img src="assets/gifs/situation.gif" width="300" alt="Animation: az grafana create"></p>
+<p align="center"><img src="assets/gifs/situation.gif" width="300" alt="A dashboard that is empty until two roles are assigned"></p>
 
-On Kubernetes you ran your own Grafana next to Prometheus, and you patched it, backed it up and kept it alive. The owner of the cafe asks a simple question: "Can I see the storage numbers on a screen, without you running yet another server?" Azure sells exactly that: **Azure Managed Grafana**, a Grafana that Microsoft runs, with Azure Monitor already wired in as a data source.
+```text
+FAQ - "My Managed Grafana is empty"
+Q: I created Azure Managed Grafana. Why can nobody open it?
+A: A new workspace lets nobody in until two separate permissions exist.
+Q: I am subscription Owner. Isn't that enough?
+A: No. Owner is not a Grafana role.
+Q: I can open it, but there is no data.
+A: The workspace itself needs a role on your Azure resources.
+```
 
-The catch is not Grafana. It is **identity**. A new Managed Grafana shows nothing and lets nobody in until two separate permissions exist: **you** need a Grafana role to open it (being subscription Owner is not enough), and **the workspace itself** needs a role on your Azure resources to read their metrics. Most "my dashboard is empty" tickets are one of these two.
+On Kubernetes you ran your own Grafana next to Prometheus, and you patched it, backed it up and kept it alive. The cafe owner asks: *"Can I see the storage numbers on a screen, without you running yet another server?"* Azure sells exactly that: a Grafana that Microsoft runs, with Azure Monitor already wired in as a data source.
+
+The catch is not Grafana. It is **identity**: **you** need a Grafana role, and **the workspace** needs a role to read metrics. Most "my dashboard is empty" tickets are one of these two, and this lab makes you hit both.
 
 > [!IMPORTANT]
 > **Your mission**
